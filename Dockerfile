@@ -4,10 +4,11 @@ ENV PYTHONUNBUFFERED 1
 RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
 ADD pip.conf /root/.pip/pip.conf
+ADD requirements.txt requirements.txt
 
 RUN apt update -y \
     && apt install -y caffe-cpu python3 python3-pip wget \
-    && pip3 install nsfw
+    && pip3 install -r requirement.txts
 # 修复时区
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ENV PATH=/usr/local/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
