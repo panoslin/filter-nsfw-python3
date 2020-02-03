@@ -9,7 +9,7 @@ ADD pip.conf /root/.pip/pip.conf
 
 RUN apt update -y \
     && apt install -y caffe-cpu python3 python3-pip wget \
-    && pip3 install -r requirement.txts
+    && pip3 install -r requirements.txt
 # 修复时区
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ENV PATH=/usr/local/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
