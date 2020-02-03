@@ -1,5 +1,8 @@
 FROM debian:stretch-slim
 ENV PYTHONUNBUFFERED 1
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+ENV FLASK_APP api.py
 ##  添加国内镜像源
 RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
