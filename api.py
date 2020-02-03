@@ -9,7 +9,7 @@ import sys, os
 curPath = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(curPath)
 
-from ns4w.classifier import classify
+from ns4w.classifier import classify_image
 from flask import Flask
 from flask import request
 import os
@@ -25,7 +25,7 @@ def classifier():
         image_path = request.args.get('image_path')
     if image_path:
         if os.path.exists(image_path):
-            sfw, nsfw = classify(image_path)
+            sfw, nsfw = classify_image(image_path)
             return {
                 "code": 200,
                 "message": "success",

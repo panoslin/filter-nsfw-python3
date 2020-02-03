@@ -7,7 +7,7 @@ import PIL.Image as Image
 
 from nsfw import classify
 
-def classify(image_path):
+def classify_image(image_path):
     image = Image.open(image_path)
     sfw, nsfw = classify(image)
     return sfw, nsfw
