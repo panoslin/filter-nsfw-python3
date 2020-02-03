@@ -23,10 +23,10 @@ app = Flask(__name__)
 def classifier():
     if request.method == 'POST':
         image_path = request.form.get('image_path', None)
-        image_url = request.form.get('image_path', None)
+        image_url = request.form.get('image_url', None)
     else:
         image_path = request.args.get('image_path', None)
-        image_url = request.args.get('image_path', None)
+        image_url = request.args.get('image_url', None)
     if image_path:
         if os.path.exists(image_path):
             sfw, nsfw = classify_image(image_path)
