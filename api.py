@@ -4,6 +4,7 @@
 # IDE: PyCharm
 
 ## flask run --host=0.0.0.0 --port=6739
+## curl http://0.0.0.0:6739/?image_path=/root/CrawlerBackend/download/avatar/bb2ecb28-306a-11ea-b19d-00155d07b703.jpg
 import sys, os
 
 curPath = os.path.abspath(os.path.dirname(__file__))
@@ -13,6 +14,7 @@ from ns4w.classifier import classify_image
 from flask import Flask
 from flask import request
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -20,9 +22,11 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def classifier():
     if request.method == 'POST':
-        image_path = request.form.get('image_path')
+        image_path = request.form.get('image_path', None)
+        image_url = request.form.get('image_path', None)
     else:
-        image_path = request.args.get('image_path')
+        image_path = request.args.get('image_path', None)
+        image_url = request.args.get('image_path', None)
     if image_path:
         if os.path.exists(image_path):
             sfw, nsfw = classify_image(image_path)
@@ -36,9 +40,28 @@ def classifier():
             }
         else:
             return {
-                "code": 400,
+                "code": 401,
                 "message": "image_path does not exist",
                 "data": None
+            }
+    elif image_url:
+        response = requests.get(image_url)
+        status_code = response.status_code
+        if status_code >= 400:
+            return {
+                "code": 402,
+                "message": "image_url {image_url} cannot be accessed".format(image_url=image_url),
+                "data": None
+            }
+        else:
+            sfw, nsfw = classify_image(response)
+            return {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "sfw": sfw,
+                    "nsfw": nsfw,
+                }
             }
 
     else:

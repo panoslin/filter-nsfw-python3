@@ -4,15 +4,16 @@
 # IDE: PyCharm
 
 import PIL.Image as Image
-
 from nsfw import classify
+from io import BytesIO
 
-def classify_image(image_path):
-    image = Image.open(image_path)
+def classify_image(image_path, response=None):
+    if response:
+        image = Image.open(BytesIO(response.content))
+    else:
+        image = Image.open(image_path)
     sfw, nsfw = classify(image)
     return sfw, nsfw
-    # print("SFW Probability: {}".format(sfw))
-    # print("NSFW Probability: {}".format(nsfw))
 
 if __name__ == '__main__':
     pass
