@@ -29,7 +29,7 @@ def classifier():
         image_url = request.args.get('image_url', None)
     if image_path:
         if os.path.exists(image_path):
-            sfw, nsfw = classify_image(image_path)
+            sfw, nsfw = classify_image(image_path=image_path)
             return {
                 "code": 200,
                 "message": "success",
@@ -54,7 +54,7 @@ def classifier():
                 "data": None
             }
         else:
-            sfw, nsfw = classify_image(response)
+            sfw, nsfw = classify_image(response=response)
             return {
                 "code": 200,
                 "message": "success",
