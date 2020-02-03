@@ -4,10 +4,10 @@
 # IDE: PyCharm
 
 ## flask run --host=0.0.0.0 --port=6739
-# import sys, os
-#
-# curPath = os.path.abspath(os.path.dirname(__file__))
-# sys.path.append(curPath)
+import sys, os
+
+curPath = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(curPath)
 
 from ns4w.classifier import classify
 from flask import Flask
