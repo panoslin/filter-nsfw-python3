@@ -4,7 +4,7 @@
 # IDE: PyCharm
 
 ## flask run --host=0.0.0.0 --port=6739
-## curl http://0.0.0.0:6739/?image_path=/root/CrawlerBackend/download/avatar/bb2ecb28-306a-11ea-b19d-00155d07b703.jpg
+## curl http://0.0.0.0:6739/?image_path=/path/to/image.jpg
 import sys, os
 
 curPath = os.path.abspath(os.path.dirname(__file__))
