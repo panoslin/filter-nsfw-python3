@@ -50,7 +50,9 @@ def classifier():
         if status_code >= 400:
             return {
                 "code": 402,
-                "message": "image_url {image_url} cannot be accessed".format(image_url=image_url),
+                "message": "image_url \n"
+                           "'{image_url}' \n"
+                           "cannot be accessed".format(image_url=image_url),
                 "data": None
             }
         else:
@@ -59,7 +61,9 @@ def classifier():
             except OSError:
                 return {
                     "code": 403,
-                    "message": "image_url {image_url} is not an image file".format(image_url=image_url),
+                    "message": "image_url \n"
+                               "'{image_url}' \n"
+                               "is not an image file".format(image_url=image_url),
                     "data": None
                 }
             else:
