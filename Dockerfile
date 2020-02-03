@@ -3,8 +3,9 @@ ENV PYTHONUNBUFFERED 1
 ##  添加国内镜像源
 RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
+ADD requirements.txt /filter-nsfw-python3/
+WORKDIR /filter-nsfw-python3
 ADD pip.conf /root/.pip/pip.conf
-ADD requirements.txt requirements.txt
 
 RUN apt update -y \
     && apt install -y caffe-cpu python3 python3-pip wget \
