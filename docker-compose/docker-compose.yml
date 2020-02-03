@@ -3,7 +3,7 @@ services:
   web:
     image: nsfw:latest
     deploy:  # This only takes effect when deploying to a swarm with docker stack deploy, and is ignored by docker-compose up and docker-compose run.
-      mode: global
+      replicas: 4  # Run 4 instances of that image as a service called web
       resources:
         limits:
           cpus: "1"  # limiting each one to use, at most, 10 core of CPU
