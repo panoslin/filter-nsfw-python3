@@ -14,5 +14,4 @@ services:
       - 6739:6739
     volumes:
       - ../:/filter-nsfw-python3
-#      - /root/CrawlerBackend/download/avatar:/root/CrawlerBackend/download/avatar
     command: gunicorn -c gunicorn/gunicorn_conf.py  api:app
