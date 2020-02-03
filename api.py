@@ -54,15 +54,23 @@ def classifier():
                 "data": None
             }
         else:
-            sfw, nsfw = classify_image(response=response)
-            return {
-                "code": 200,
-                "message": "success",
-                "data": {
-                    "sfw": sfw,
-                    "nsfw": nsfw,
+            try:
+                sfw, nsfw = classify_image(response=response)
+            except OSError:
+                return {
+                    "code": 403,
+                    "message": "image_url {image_url} is not an image file".format(image_url=image_url),
+                    "data": None
                 }
-            }
+            else:
+                return {
+                    "code": 200,
+                    "message": "success",
+                    "data": {
+                        "sfw": sfw,
+                        "nsfw": nsfw,
+                    }
+                }
 
     else:
         return {
