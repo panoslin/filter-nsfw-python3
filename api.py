@@ -19,11 +19,19 @@ import requests
 app = Flask(__name__)
 
 
+def get_post_args(request, key, default=None):
+    try:
+        data = request.json.get(key, default)
+    except AttributeError:
+        data = request.form.get(key, default)
+    return data
+
+
 @app.route('/', methods=['GET', 'POST'])
 def classifier():
     if request.method == 'POST':
-        image_path = request.form.get('image_path', None)
-        image_url = request.form.get('image_url', None)
+        image_path = get_post_args(request, "image_path")
+        image_url = get_post_args(request, "image_url")
     else:
         image_path = request.args.get('image_path', None)
         image_url = request.args.get('image_url', None)
