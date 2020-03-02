@@ -35,6 +35,7 @@ def classifier():
     else:
         image_path = request.args.get('image_path', None)
         image_url = request.args.get('image_url', None)
+    print(locals())
     if image_path:
         if os.path.exists(image_path):
             sfw, nsfw = classify_image(image_path=image_path)
